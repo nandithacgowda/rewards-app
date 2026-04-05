@@ -2,7 +2,7 @@ import { useState, useMemo } from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
 import logger from "../logger.js";
-import calculateRewards from "../utlis/rewardCalculator.js";
+import calculateRewards from "../utils/rewardCalculator.js";
 import {
   MONTHS,
   YEARS,
@@ -10,7 +10,7 @@ import {
   MESSAGES,
   TABLE_HEADERS,
 } from "../constants/appConstants.js";
-import Pagination from "./Pagination.jsx";
+import Pagination from "./Pagination";
 
 const Card = styled.div`
   background: #fff;

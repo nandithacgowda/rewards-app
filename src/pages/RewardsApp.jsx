@@ -2,14 +2,10 @@ import { useState, useEffect, useCallback, useMemo } from "react";
 import styled from "styled-components";
 import logger from "../logger";
 import fetchTransactions from "../services/api.js";
-import calculateRewards from "../utlis/rewardCalculator.js";
-import {
-  ITEMS_PER_PAGE,
-  MESSAGES,
-} from "../constants/appConstants";
+import rewardCalculator from "../utils/rewardCalculator.js";
+import { ITEMS_PER_PAGE, MESSAGES } from "../constants/appConstants";
 import CustomerTable from "../components/customerTable";
 import CustomerDetails from "../components/customerDetails";
-
 const Container = styled.div`
   max-width: 1100px;
   margin: 0 auto;
@@ -73,7 +69,7 @@ const RewardsApp = () => {
           totalRewards: 0,
         };
       }
-      map[t.customerId].totalRewards += calculateRewards(t.amount);
+      map[t.customerId].totalRewards += rewardCalculator(t.amount);
     });
     return Object.values(map);
   }, [transactions]);

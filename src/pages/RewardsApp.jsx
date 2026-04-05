@@ -6,6 +6,7 @@ import rewardCalculator from "../utils/rewardCalculator.js";
 import { ITEMS_PER_PAGE, MESSAGES } from "../constants/appConstants";
 import CustomerTable from "../components/customerTable";
 import CustomerDetails from "../components/customerDetails";
+
 const Container = styled.div`
   max-width: 1100px;
   margin: 0 auto;
@@ -74,9 +75,14 @@ const RewardsApp = () => {
     return Object.values(map);
   }, [transactions]);
 
+  const selectedTransactions = useMemo(() => {
+    return transactions.filter((t) => t.customerId === selectedCustomer);
+  }, [transactions, selectedCustomer]);
+
   const handleSelectCustomer = useCallback((customerId) => {
     logger.info(`Customer selected: ${customerId}`);
     setSelectedCustomer(customerId);
+    setCustomerPage(1); 
   }, []);
 
   const handleBack = useCallback(() => {
@@ -89,6 +95,7 @@ const RewardsApp = () => {
         <Loading>{MESSAGES.loading}</Loading>
       </Container>
     );
+  
   if (error)
     return (
       <Container>
@@ -97,6 +104,7 @@ const RewardsApp = () => {
     );
 
   const totalPages = Math.ceil(customers.length / ITEMS_PER_PAGE);
+
   const pagedCustomers = customers.slice(
     (customerPage - 1) * ITEMS_PER_PAGE,
     customerPage * ITEMS_PER_PAGE,
@@ -105,12 +113,11 @@ const RewardsApp = () => {
   return (
     <Container>
       <Title>Customer Rewards Program</Title>
+
       {selectedCustomer ? (
         <CustomerDetails
           customerId={selectedCustomer}
-          transactions={transactions.filter(
-            (t) => t.customerId === selectedCustomer,
-          )}
+          transactions={selectedTransactions} // ✅ optimized
           onBack={handleBack}
         />
       ) : (

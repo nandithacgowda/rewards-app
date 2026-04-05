@@ -30,7 +30,7 @@ Example:
 1. Clone the repository
 
 ```bash
-git clone https://github.com/your-username/rewards-app.git
+git clone https://github.com/nandithacgowda/rewards-app
 cd rewards-app
 ```
 
@@ -150,6 +150,6 @@ Logs are added for:
 
 ## Repository
 
-https://github.com/your-username/rewards-app
+https://github.com/nandithacgowda/rewards-app
 
 ---
